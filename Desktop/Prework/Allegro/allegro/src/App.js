@@ -4,25 +4,19 @@ const Pokedex = require('pokedex-promise-v2');
 
 
 class App extends React.Component {
-  state = {
-    pokemonNames: []
-  }
 
   componentDidMount() {
     const P = new Pokedex();
 
-    P.getPokemonsList()
-      .then(res => {
-        return res.results.map(pokemon => {
-          this.setState({
-            pokemonNames: pokemon.name
+    const test = () =>
+      P.getPokemonsList()
+        .then(res => {
+          return res.results.map(pokemon => {
+            return pokemon.name
           })
-          return pokemon.name
         })
-      })
-      .catch(err => {
-        console.log('There was an ERROR', err);
-      });
+
+    console.log(test());
   }
 
   render() {
