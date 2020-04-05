@@ -2,28 +2,32 @@ import React from 'react';
 import './App.module.scss';
 const Pokedex = require('pokedex-promise-v2');
 
-
-class App extends React.Component {
-
-  componentDidMount() {
-    const P = new Pokedex();
-
-    const test = () =>
-      P.getPokemonsList()
+const P = new Pokedex();
+P.getPokemonsList()
+  .then(res => {
+    return res
+  }).then(res => {
+    res.results.map(pokemon => {
+      return pokemon.name
+    }).map(pokemonName => {
+      return P.getPokemonByName(pokemonName)
         .then(res => {
-          return res.results.map(pokemon => {
-            return pokemon.name
-          })
+          console.log(res);
+          return res
         })
+    })
+  })
 
-    console.log(test());
-  }
 
-  render() {
-    return <div>
-      <h1>Hello World</h1>
-    </div>
-  }
-}
+
+// P.getPokemonByName('bulbasaur')
+//   .then(res => {
+//     console.log(res)
+//   })
+
+const App = () => (
+  <div></div>
+
+)
 
 export default App;
