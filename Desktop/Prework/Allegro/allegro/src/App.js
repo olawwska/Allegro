@@ -1,5 +1,8 @@
 import React from 'react';
 import './App.module.scss';
+import ListItem from './components/ListItem/ListItem';
+import styles from './App.module.scss';
+
 const Pokedex = require('pokedex-promise-v2');
 
 
@@ -35,12 +38,25 @@ class App extends React.Component {
       })
   }
 
-  //z tego zrobić funkcję i wsadzić ją do rendera usuwając stan 
-  //ewentualnie https://stackoverflow.com/questions/47735600/react-setstate-in-a-map-function
+  pokemonCreate = (pokemons) => {
+    return pokemons.map((onePokemon) => {
+      return <ListItem
+        name={onePokemon.name}
+        image={onePokemon.sprites.front_default}
+        key={onePokemon.name}
+      />
+    })
+  };
 
 
   render() {
-    return <div></div>
+
+    const { pokemonInfos } = this.state
+
+    return <div className={styles.mainWrapper}>
+      <ListItem />
+      {this.pokemonCreate(pokemonInfos)}
+    </div>
   }
 }
 
