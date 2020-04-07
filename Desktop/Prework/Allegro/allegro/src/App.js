@@ -44,6 +44,7 @@ class App extends React.Component {
         name={onePokemon.name}
         image={onePokemon.sprites.front_default}
         key={onePokemon.name}
+        alt={onePokemon.name}
       />
     })
   };
