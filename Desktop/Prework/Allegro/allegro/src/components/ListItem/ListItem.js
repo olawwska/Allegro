@@ -7,12 +7,17 @@ import PropTypes from 'prop-types';
 const ListItem = ({ name, image }) => (
     <>
         <div className={styles.wrapper}>
-            <img
-                className={styles.image}
-                src={image}
-                alt={name}>
-            </img>
-            <h2>{name}</h2>
+            <div className={styles.image}>
+                <img
+                    className={styles.image__wrapper}
+                    src={image}
+                    alt={name}>
+                </img>
+            </div>
+            <div className={styles.text}>
+                <h2>{name}</h2>
+                <h2>{name}</h2>
+            </div>
         </div>
     </>
 );
@@ -22,9 +27,9 @@ ListItem.propTypes = {
     name: PropTypes.string.isRequired,
 };
 
-// ListItem.defaultProps = {
-//     image: null
-// };
+ListItem.defaultProps = {
+    image: null
+};
 
 ListItem.defaultProps = {
     image: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png",

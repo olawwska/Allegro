@@ -1,22 +1,29 @@
 .wrapper{
-    padding: 50px 30px;
-    height: 200px;
+    height: 400px;
     display: flex;
-    align-items: center;
     position: relative;
     border: 1px solid #ddd;
+    flex-direction: column;
 
     h2{
-        color: #1e58ff;
+        text-transform: uppercase;
     }
 }
 
 .image{
+    
+
+    &__wrapper{
     box-sizing: border-box;
-    width: 160px;
-    height: 160px;
+    width: 262px;
+    height: 240px;
     object-fit: cover;
-    border: 1px solid #ddd;
-    border-radius: 50%;
-    margin: 20px 50px;
+    // border: 1px solid #ddd;
+    background-color: #f3ece0;
+    }
 }
+
+.text{
+    padding-left: 10px;
+}
+

@@ -52,11 +52,15 @@ class App extends React.Component {
 
   render() {
 
-    const { pokemonInfos } = this.state
+    // const { pokemonInfos } = this.state
 
     return <div className={styles.mainWrapper}>
       <ListItem />
-      {this.pokemonCreate(pokemonInfos)}
+      <ListItem />
+      <ListItem />
+      <ListItem />
+      <ListItem />
+      {/* {this.pokemonCreate(pokemonInfos)} */}
     </div>
   }
 }
