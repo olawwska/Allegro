@@ -1,9 +1,10 @@
 import React from 'react';
 // import './App.module.scss';
 import ListItem from './components/ListItem/ListItem';
+import Pagination from './components/Pagination/Pagination';
 // import styles from './App.module.scss';
-import './App.css'
-import ReactPaginate from 'react-paginate';
+import styles from './App.module.scss';
+
 
 const Pokedex = require('pokedex-promise-v2');
 
@@ -85,19 +86,11 @@ class App extends React.Component {
 
     return (
       <>
-        <ReactPaginate
-          previousLabel={"prev"}
-          nextLabel={"next"}
-          breakLabel={"..."}
-          breakClassName={"break-me"}
+        <Pagination
           pageCount={pageCount}
-          marginPagesDisplayed={2}
-          pageRangeDisplayed={5}
-          onPageChange={this.handlePageChange}
-          containerClassName={"pagination"}
-          subContainerClassName={"pages pagination"}
-          activeClassName={"active"} />
-        <div className={"mainWrapper"}>
+          handlePageChangeMethod={this.handlePageChange}
+        />
+        <div className={styles.mainWrapper}>
           {pagedPokemons}
         </div>
       </>

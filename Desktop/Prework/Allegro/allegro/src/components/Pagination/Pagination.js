@@ -1,27 +1,25 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import Pagination from '@material-ui/lab/Pagination';
+import ReactPaginate from 'react-paginate';
+import './Pagination.css'
 
-const useStyles = makeStyles((theme) => ({
-    root: {
-        '& > *': {
-            marginTop: theme.spacing(2),
-        },
-    },
-}));
-
-const BasicPagination = (count, handlePageChangeMethod) => {
-
-    const classes = useStyles();
+const Pagination = ({ count, handlePageChangeMethod }) => {
 
     return (
-        <div className={classes.root}>
-            <Pagination
-                count={count}
-                onChange={handlePageChangeMethod}
-            />
-        </div>
+        <>
+            <ReactPaginate
+                previousLabel={"prev"}
+                nextLabel={"next"}
+                breakLabel={"..."}
+                breakClassName={"break-me"}
+                pageCount={count}
+                marginPagesDisplayed={2}
+                pageRangeDisplayed={5}
+                onPageChange={handlePageChangeMethod}
+                containerClassName={"pagination"}
+                subContainerClassName={"pages pagination"}
+                activeClassName={"active"} />
+        </>
     )
 };
 
-export default BasicPagination; 
+export default Pagination; 
