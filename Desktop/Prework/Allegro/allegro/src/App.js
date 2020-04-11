@@ -1,8 +1,9 @@
 import React from 'react';
-import './App.module.scss';
+// import './App.module.scss';
 import ListItem from './components/ListItem/ListItem';
-import styles from './App.module.scss';
-import BasicPagination from './components/Pagination/Pagination';
+// import styles from './App.module.scss';
+import './App.css'
+import ReactPaginate from 'react-paginate';
 
 const Pokedex = require('pokedex-promise-v2');
 
@@ -16,6 +17,7 @@ class App extends React.Component {
     currentPage: 0,
     pageCount: null
   };
+
 
   componentDidMount() {
     this.pokemonGetter()
@@ -69,7 +71,8 @@ class App extends React.Component {
 
   render() {
 
-    const { pokemonInfos, pageCount } = this.state;
+    const { pokemonInfos, perPage } = this.state;
+    const pageCount = Math.ceil(pokemonInfos.length / perPage)
     const slice = pokemonInfos.slice(this.state.offset, this.state.offset + this.state.perPage);
     const pagedPokemons = slice.map(pp =>
       <ListItem
@@ -81,13 +84,23 @@ class App extends React.Component {
     );
 
     return (
-      <div className={styles.mainWrapper}>
-        <BasicPagination
-          count={pageCount}
-          handlePageChangeMethod={this.handlePageChange}
-        />
-        {pagedPokemons}
-      </div>
+      <>
+        <ReactPaginate
+          previousLabel={"prev"}
+          nextLabel={"next"}
+          breakLabel={"..."}
+          breakClassName={"break-me"}
+          pageCount={pageCount}
+          marginPagesDisplayed={2}
+          pageRangeDisplayed={5}
+          onPageChange={this.handlePageChange}
+          containerClassName={"pagination"}
+          subContainerClassName={"pages pagination"}
+          activeClassName={"active"} />
+        <div className={"mainWrapper"}>
+          {pagedPokemons}
+        </div>
+      </>
     )
   }
 }
