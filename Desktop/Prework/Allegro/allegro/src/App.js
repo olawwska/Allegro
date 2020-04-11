@@ -63,10 +63,10 @@ class App extends React.Component {
         alt={pp.name}
       </ListItem>)
 
-    this.setState({
-      pageCount: Math.ceil(pokemons.length / this.state.perPage),
-      pagedPokemons
-    })
+    // this.setState({
+    //   pageCount: Math.ceil(pokemons.length / this.state.perPage),
+    //   pagedPokemons
+    // })
     //cant perform react setState on an unmounted component To fix, cancel all subscriptions and asynchronous tasks in the componentWillUnmount method.
   }
 
