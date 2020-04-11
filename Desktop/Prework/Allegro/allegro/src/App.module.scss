@@ -1,7 +1,8 @@
 .mainWrapper{
-    margin: 150px 200px;
+   margin: 18vh 14vw 0 14vw;
     display: grid;
-    grid-gap: 50px;
+    // grid-gap: 0;
+    grid-gap: 1rem;
     grid-template-columns: repeat(5, 1fr);
-    grid-template-rows: 400px;
+    grid-template-rows: 280px;
 }

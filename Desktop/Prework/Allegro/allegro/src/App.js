@@ -15,9 +15,13 @@ class App extends React.Component {
     perPage: 10,
     currentPage: 0,
     pageCount: null
+  };
+
+  componentDidMount() {
+    this.pokemonGetter()
   }
 
-  pokemonGetter() {
+  pokemonGetter = () => {
     const P = new Pokedex();
 
     P.getPokemonsList()
@@ -29,7 +33,7 @@ class App extends React.Component {
         }).map(pokemonName => {
           return P.getPokemonByName(pokemonName)
             .then(res => {
-              const pokemonsInfos = [...this.state.pokemonInfos]
+              const pokemonsInfos = [...this.state.pokemonInfos];
               this.setState({
                 pokemonInfos: [
                   ...pokemonsInfos, res]
@@ -39,48 +43,35 @@ class App extends React.Component {
         })
       }).catch(err => {
         console.log(err)
-      })
-  }
+      });
 
-  // pokemonCreate = (pokemons) => {
-  //   return pokemons.map((onePokemon) => {
-  //     return <ListItem
-  //       name={onePokemon.name}
-  //       image={onePokemon.sprites.front_default}
-  //       key={onePokemon.name}
-  //       alt={onePokemon.name}
-  //     />
-  //   })
-  // };
+    this.updatePageCount()
+  };
 
-  pokemonCreate = (pokemons) => {
-    const slice = pokemons.slice(this.state.offset, this.state.offset + this.state.perPage)
+  updatePageCount = () => {
+    const { pokemonInfos } = this.state;
+    this.setState({
+      pageCount: Math.ceil(pokemonInfos.length / this.state.perPage)
+    })
+  };
+
+  render() {
+    const { pokemonInfos } = this.state;
+    const slice = pokemonInfos.slice(this.state.offset, this.state.offset + this.state.perPage);
     const pagedPokemons = slice.map(pp =>
-      <ListItem>
+      <ListItem
         name={pp.name}
         image={pp.sprites.front_default}
         key={pp.name}
         alt={pp.name}
-      </ListItem>)
+      />
+    );
 
-    // this.setState({
-    //   pageCount: Math.ceil(pokemons.length / this.state.perPage),
-    //   pagedPokemons
-    // })
-    //cant perform react setState on an unmounted component To fix, cancel all subscriptions and asynchronous tasks in the componentWillUnmount method.
-  }
-
-
-  componentDidMount() {
-    this.pokemonGetter()
-  }
-
-  render() {
-    const { pokemonInfos } = this.state
-
-    return <div className={styles.mainWrapper}>
-      {this.pokemonCreate(pokemonInfos)}
-    </div>
+    return (
+      <div className={styles.mainWrapper}>
+        {pagedPokemons}
+      </div>
+    )
   }
 }
 
