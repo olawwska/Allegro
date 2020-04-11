@@ -2,7 +2,7 @@ import React from 'react';
 import './App.module.scss';
 import ListItem from './components/ListItem/ListItem';
 import styles from './App.module.scss';
-// import Pagination from '@material-ui/core/Button';
+import BasicPagination from './components/Pagination/Pagination';
 
 const Pokedex = require('pokedex-promise-v2');
 
@@ -55,8 +55,21 @@ class App extends React.Component {
     })
   };
 
+  handlePageChange = (e) => {
+    const selectedPage = e.selected;
+    const offset = selectedPage * this.state.perPage;
+
+    this.setState({
+      currentPage: selectedPage,
+      offset: offset
+    }, () => {
+      this.updatePageCount()
+    });
+  }
+
   render() {
-    const { pokemonInfos } = this.state;
+
+    const { pokemonInfos, pageCount } = this.state;
     const slice = pokemonInfos.slice(this.state.offset, this.state.offset + this.state.perPage);
     const pagedPokemons = slice.map(pp =>
       <ListItem
@@ -69,6 +82,10 @@ class App extends React.Component {
 
     return (
       <div className={styles.mainWrapper}>
+        <BasicPagination
+          count={pageCount}
+          handlePageChangeMethod={this.handlePageChange}
+        />
         {pagedPokemons}
       </div>
     )
