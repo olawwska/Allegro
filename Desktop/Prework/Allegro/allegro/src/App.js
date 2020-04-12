@@ -1,13 +1,35 @@
 import React from 'react';
-// import './App.module.scss';
 import ListItem from './components/ListItem/ListItem';
 import Pagination from './components/Pagination/Pagination';
-// import styles from './App.module.scss';
 import styles from './App.module.scss';
+import Select from 'react-select'
+
 
 
 const Pokedex = require('pokedex-promise-v2');
 
+const options = [
+  { value: 'normal', label: 'normal' },
+  { value: 'fighting', label: 'fighting' },
+  { value: 'flying', label: 'flying' },
+  { value: 'poison', label: 'poison' },
+  { value: 'ground', label: 'ground' },
+  { value: 'rock', label: 'rock' },
+  { value: 'bug', label: 'bug' },
+  { value: 'ghost', label: 'ghost' },
+  { value: 'steel', label: 'steel' },
+  { value: 'fire', label: 'fire' },
+  { value: 'water', label: 'water' },
+  { value: 'grass', label: 'grass' },
+  { value: 'electric', label: 'electric' },
+  { value: 'psychic', label: 'psychic' },
+  { value: 'ice', label: 'ice' },
+  { value: 'dragon', label: 'dragon' },
+  { value: 'dark', label: 'dark' },
+  { value: 'fairy', label: 'fairy' },
+  { value: 'unknown', label: 'unknown' },
+  { value: 'shadow', label: 'shadow' }
+]
 
 class App extends React.Component {
 
@@ -17,8 +39,8 @@ class App extends React.Component {
     perPage: 10,
     currentPage: 0,
     pageCount: null,
+    selectedOption: null,
   };
-
 
   componentDidMount() {
     this.pokemonGetter()
@@ -70,9 +92,21 @@ class App extends React.Component {
     });
   }
 
+  handleSelectChange = (selectValue) => {
+    const { pokemonInfos } = this.state;
+    this.setState({
+      selectedOption: selectValue,
+      pokemonInfos: pokemonInfos
+        .filter(pokemon => {
+          return pokemon.types[0].type.name === selectValue.value
+        }
+        )
+    })
+  }
+
   render() {
 
-    const { pokemonInfos, perPage } = this.state;
+    const { pokemonInfos, perPage, selectedOption } = this.state;
     const pageCount = Math.ceil(pokemonInfos.length / perPage)
     const slice = pokemonInfos.slice(this.state.offset, this.state.offset + this.state.perPage);
     const pagedPokemons = slice
@@ -92,6 +126,23 @@ class App extends React.Component {
           count={pageCount}
           handlePageChangeMethod={this.handlePageChange}
         />
+        <Select
+          value={selectedOption}
+          onChange={this.handleSelectChange}
+          options={options}
+          // styles={colourStyles}
+          placeholder={'wybierz typ...'}
+          theme={theme => ({
+            ...theme,
+            borderRadius: 0,
+            colors: {
+              ...theme.colors,
+              primary25: 'hotpink',
+              primary: 'black',
+            },
+          })}
+        >
+        </Select>
         <div className={styles.mainWrapper}>
           {pagedPokemons}
         </div>
