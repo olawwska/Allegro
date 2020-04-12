@@ -72,13 +72,10 @@ class App extends React.Component {
 
   render() {
 
-    const { pokemonInfos, perPage, selectedOption } = this.state;
+    const { pokemonInfos, perPage } = this.state;
     const pageCount = Math.ceil(pokemonInfos.length / perPage)
     const slice = pokemonInfos.slice(this.state.offset, this.state.offset + this.state.perPage);
     const pagedPokemons = slice
-      .filter(pp => {
-        return selectedOption < pp.base_experience
-      })
       .map(pp =>
         <ListItem
           name={pp.name}
@@ -92,7 +89,7 @@ class App extends React.Component {
     return (
       <>
         <Pagination
-          pageCount={pageCount}
+          count={pageCount}
           handlePageChangeMethod={this.handlePageChange}
         />
         <div className={styles.mainWrapper}>
