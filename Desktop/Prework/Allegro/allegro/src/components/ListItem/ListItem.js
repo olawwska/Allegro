@@ -4,7 +4,7 @@ import React from 'react';
 import styles from './ListItem.module.scss';
 import PropTypes from 'prop-types';
 
-const ListItem = ({ name, image, baseExperience }) => (
+const ListItem = ({ name, image, type }) => (
     <>
         <div className={styles.wrapper}>
             <div className={styles.image}>
@@ -16,7 +16,7 @@ const ListItem = ({ name, image, baseExperience }) => (
             </div>
             <div className={styles.text}>
                 <h2>{name}</h2>
-                <h2>{baseExperience}</h2>
+                <h2>{type}</h2>
             </div>
         </div>
     </>

@@ -36,6 +36,7 @@ class App extends React.Component {
   state = {
     offset: 0,
     pokemonInfos: [],
+    filtredPokemonInfos: [],
     perPage: 10,
     currentPage: 0,
     pageCount: null,
@@ -61,7 +62,9 @@ class App extends React.Component {
               const pokemonsInfos = [...this.state.pokemonInfos];
               this.setState({
                 pokemonInfos: [
-                  ...pokemonsInfos, res]
+                  ...pokemonsInfos, res],
+                filtredPokemonInfos: [
+                  ...pokemonsInfos, res],
 
               });
             })
@@ -96,7 +99,7 @@ class App extends React.Component {
     const { pokemonInfos } = this.state;
     this.setState({
       selectedOption: selectValue,
-      pokemonInfos: pokemonInfos
+      filtredPokemonInfos: pokemonInfos
         .filter(pokemon => {
           return pokemon.types[0].type.name === selectValue.value
         }
@@ -106,9 +109,10 @@ class App extends React.Component {
 
   render() {
 
-    const { pokemonInfos, perPage, selectedOption } = this.state;
-    const pageCount = Math.ceil(pokemonInfos.length / perPage)
-    const slice = pokemonInfos.slice(this.state.offset, this.state.offset + this.state.perPage);
+    // const { pokemonInfos, perPage, selectedOption, filtredPokemonInfos } = this.state;
+    const { perPage, selectedOption, filtredPokemonInfos } = this.state;
+    const pageCount = Math.ceil(filtredPokemonInfos.length / perPage)
+    const slice = filtredPokemonInfos.slice(this.state.offset, this.state.offset + this.state.perPage);
     const pagedPokemons = slice
       .map(pp =>
         <ListItem
@@ -116,16 +120,12 @@ class App extends React.Component {
           image={pp.sprites.front_default}
           key={pp.name}
           alt={pp.name}
-          baseExperience={pp.base_experience}
+          type={pp.types[0].type.name}
         />
       );
 
     return (
       <>
-        <Pagination
-          count={pageCount}
-          handlePageChangeMethod={this.handlePageChange}
-        />
         <Select
           value={selectedOption}
           onChange={this.handleSelectChange}
@@ -146,6 +146,10 @@ class App extends React.Component {
         <div className={styles.mainWrapper}>
           {pagedPokemons}
         </div>
+        <Pagination
+          count={pageCount}
+          handlePageChangeMethod={this.handlePageChange}
+        />
       </>
     )
   }
