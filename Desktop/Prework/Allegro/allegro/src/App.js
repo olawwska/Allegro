@@ -16,7 +16,7 @@ class App extends React.Component {
     pokemonInfos: [],
     perPage: 10,
     currentPage: 0,
-    pageCount: null
+    pageCount: null,
   };
 
 
@@ -72,17 +72,22 @@ class App extends React.Component {
 
   render() {
 
-    const { pokemonInfos, perPage } = this.state;
+    const { pokemonInfos, perPage, selectedOption } = this.state;
     const pageCount = Math.ceil(pokemonInfos.length / perPage)
     const slice = pokemonInfos.slice(this.state.offset, this.state.offset + this.state.perPage);
-    const pagedPokemons = slice.map(pp =>
-      <ListItem
-        name={pp.name}
-        image={pp.sprites.front_default}
-        key={pp.name}
-        alt={pp.name}
-      />
-    );
+    const pagedPokemons = slice
+      .filter(pp => {
+        return selectedOption < pp.base_experience
+      })
+      .map(pp =>
+        <ListItem
+          name={pp.name}
+          image={pp.sprites.front_default}
+          key={pp.name}
+          alt={pp.name}
+          baseExperience={pp.base_experience}
+        />
+      );
 
     return (
       <>

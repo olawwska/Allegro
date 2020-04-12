@@ -4,7 +4,7 @@ import React from 'react';
 import styles from './ListItem.module.scss';
 import PropTypes from 'prop-types';
 
-const ListItem = ({ name, image }) => (
+const ListItem = ({ name, image, baseExperience }) => (
     <>
         <div className={styles.wrapper}>
             <div className={styles.image}>
@@ -16,7 +16,7 @@ const ListItem = ({ name, image }) => (
             </div>
             <div className={styles.text}>
                 <h2>{name}</h2>
-                <h2>{name}</h2>
+                <h2>{baseExperience}</h2>
             </div>
         </div>
     </>
@@ -29,11 +29,6 @@ ListItem.propTypes = {
 
 ListItem.defaultProps = {
     image: null
-};
-
-ListItem.defaultProps = {
-    image: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png",
-    name: "bulbasaur"
 };
 
 export default ListItem; 
