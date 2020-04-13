@@ -2,7 +2,7 @@ import React from 'react';
 import ListItem from './components/ListItem/ListItem';
 import Pagination from './components/Pagination/Pagination';
 import styles from './App.module.scss';
-import Select from 'react-select'
+import Header from './components/Header/Header';
 
 
 
@@ -43,9 +43,9 @@ class App extends React.Component {
     selectedOption: null,
   };
 
-  componentDidMount() {
-    this.pokemonGetter()
-  }
+  // componentDidMount() {
+  //   this.pokemonGetter()
+  // }
 
   pokemonGetter = () => {
     const P = new Pokedex();
@@ -109,7 +109,6 @@ class App extends React.Component {
 
   render() {
 
-    // const { pokemonInfos, perPage, selectedOption, filtredPokemonInfos } = this.state;
     const { perPage, selectedOption, filtredPokemonInfos } = this.state;
     const pageCount = Math.ceil(filtredPokemonInfos.length / perPage)
     const slice = filtredPokemonInfos.slice(this.state.offset, this.state.offset + this.state.perPage);
@@ -126,30 +125,28 @@ class App extends React.Component {
 
     return (
       <>
-        <Select
+        <Header
+          clickMethod={this.handleSelectChange}
           value={selectedOption}
-          onChange={this.handleSelectChange}
           options={options}
-          // styles={colourStyles}
-          placeholder={'wybierz typ...'}
-          theme={theme => ({
-            ...theme,
-            borderRadius: 0,
-            colors: {
-              ...theme.colors,
-              primary25: 'hotpink',
-              primary: 'black',
-            },
-          })}
-        >
-        </Select>
-        <div className={styles.mainWrapper}>
-          {pagedPokemons}
-        </div>
-        <Pagination
-          count={pageCount}
-          handlePageChangeMethod={this.handlePageChange}
         />
+        <div className={styles.mainWrapper}>
+          {/* {pagedPokemons} */}
+          <ListItem />
+          <ListItem />
+          <ListItem />
+          <ListItem />
+          <ListItem />
+          <ListItem />
+          <ListItem />
+          <ListItem />
+        </div>
+        <div className={styles.footer}>
+          <Pagination
+            count={pageCount}
+            handlePageChangeMethod={this.handlePageChange}
+          />
+        </div>
       </>
     )
   }
