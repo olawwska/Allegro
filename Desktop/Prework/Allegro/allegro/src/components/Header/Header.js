@@ -4,7 +4,7 @@ import styles from './Header.module.scss'
 import Select from 'react-select';
 
 const colourStyles = {
-    container: styles => ({ ...styles, padding: '2em', width: '20em', borderRadius: '10px' }),
+    container: styles => ({ ...styles, width: '20em', borderRadius: '10px' }),
     placeholder: styles => ({ ...styles, fontFamily: 'Montserrat' }),
     menuList: styles => ({ ...styles, fontFamily: 'Montserrat' }),
     menu: styles => ({ ...styles, padding: '1em', width: '14em' }),
@@ -13,7 +13,7 @@ const colourStyles = {
 
 const Header = ({ clickMethod, selectedOption, options, }) => (
     <div className={styles.header}>
-        <p className={styles.logo1}>Pokédex .</p>
+        <p className={styles.logo}>Pokédex .</p>
         <Select
             value={selectedOption}
             onChange={clickMethod}

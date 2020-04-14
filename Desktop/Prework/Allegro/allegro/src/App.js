@@ -3,6 +3,7 @@ import ListItem from './components/ListItem/ListItem';
 import Pagination from './components/Pagination/Pagination';
 import styles from './App.module.scss';
 import Header from './components/Header/Header';
+import Loader from './components/Loader/Loader'
 
 
 
@@ -41,6 +42,7 @@ class App extends React.Component {
     currentPage: 0,
     pageCount: null,
     selectedOption: null,
+    loading: true
   };
 
   // componentDidMount() {
@@ -65,7 +67,7 @@ class App extends React.Component {
                   ...pokemonsInfos, res],
                 filtredPokemonInfos: [
                   ...pokemonsInfos, res],
-
+                loading: false
               });
             })
         })
@@ -108,6 +110,17 @@ class App extends React.Component {
   }
 
   render() {
+
+    if (this.state.loading) return (
+      <>
+        <Header
+        // clickMethod={this.handleSelectChange}
+        // value={selectedOption}
+        // options={options}
+        />
+        <Loader />
+      </>)
+
 
     const { perPage, selectedOption, filtredPokemonInfos } = this.state;
     const pageCount = Math.ceil(filtredPokemonInfos.length / perPage)
