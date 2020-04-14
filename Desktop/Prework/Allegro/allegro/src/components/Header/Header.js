@@ -13,7 +13,7 @@ const colourStyles = {
 
 const Header = ({ clickMethod, selectedOption, options, }) => (
     <div className={styles.header}>
-        <img className={styles.logo}></img>
+        <p className={styles.logo1}>Pokédex .</p>
         <Select
             value={selectedOption}
             onChange={clickMethod}

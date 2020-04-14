@@ -5,16 +5,17 @@
     background: #0C0B0B;
     padding: 0 14vw; 
     display: flex;
-    justify-content: space-between;
+    justify-content: start;
     
-
-    .logo{
-        background-image: url('https://pokeserwis.pl/wp-content/uploads/2014/12/pokemon-logo.png');
-        background-size: contain;
-        width: 19rem;
-        height: 90%;
-        background-repeat: no-repeat;
-        position: relative;
+    .logo1{
+        font-family: Montserrat;
+        font-style: normal;
+        font-weight: bold;
+        font-size: 2rem;
+        text-transform: uppercase;
+        line-height: 15px;
+        color: #1E58FF;
     }
+
 }
 

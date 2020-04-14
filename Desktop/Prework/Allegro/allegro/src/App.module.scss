@@ -1,5 +1,5 @@
 .mainWrapper{
-   margin: 4vh 14vw 0 14vw;
+    margin: 4vh 14vw 0 14vw;
     display: grid;
     grid-gap: 0;
     // grid-gap: 1rem;
@@ -11,4 +11,7 @@
     display: flex;
     justify-content: center;
     height: 5rem;
+}
+.container{
+    background-color: black;
 }

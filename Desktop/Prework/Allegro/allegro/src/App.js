@@ -37,7 +37,7 @@ class App extends React.Component {
     offset: 0,
     pokemonInfos: [],
     filtredPokemonInfos: [],
-    perPage: 10,
+    perPage: 8,
     currentPage: 0,
     pageCount: null,
     selectedOption: null,
@@ -143,6 +143,7 @@ class App extends React.Component {
         </div>
         <div className={styles.footer}>
           <Pagination
+            activeClassName={styles.container}
             count={pageCount}
             handlePageChangeMethod={this.handlePageChange}
           />
