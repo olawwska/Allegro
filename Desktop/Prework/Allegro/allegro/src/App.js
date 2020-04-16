@@ -45,9 +45,9 @@ class App extends React.Component {
     loading: true
   };
 
-  // componentDidMount() {
-  //   this.pokemonGetter()
-  // }
+  componentDidMount() {
+    this.pokemonGetter()
+  }
 
   pokemonGetter = () => {
     const P = new Pokedex();
@@ -113,11 +113,7 @@ class App extends React.Component {
 
     if (this.state.loading) return (
       <>
-        <Header
-        // clickMethod={this.handleSelectChange}
-        // value={selectedOption}
-        // options={options}
-        />
+        <Header />
         <Loader />
       </>)
 
@@ -144,15 +140,7 @@ class App extends React.Component {
           options={options}
         />
         <div className={styles.mainWrapper}>
-          {/* {pagedPokemons} */}
-          <ListItem />
-          <ListItem />
-          <ListItem />
-          <ListItem />
-          <ListItem />
-          <ListItem />
-          <ListItem />
-          <ListItem />
+          {pagedPokemons}
         </div>
         <div className={styles.footer}>
           <Pagination

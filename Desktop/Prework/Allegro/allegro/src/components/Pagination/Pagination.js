@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactPaginate from 'react-paginate';
 import './Pagination.css'
+import PropTypes from 'prop-types';
 
 const Pagination = ({ count, handlePageChangeMethod }) => {
 
@@ -20,6 +21,11 @@ const Pagination = ({ count, handlePageChangeMethod }) => {
                 activeClassName={"active"} />
         </>
     )
+};
+
+Pagination.propTypes = {
+    count: PropTypes.number,
+    name: PropTypes.string
 };
 
 export default Pagination; 

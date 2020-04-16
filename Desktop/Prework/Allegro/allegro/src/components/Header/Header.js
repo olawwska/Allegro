@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './Header.module.scss'
-// import Select from '../Select/Select';
 import Select from 'react-select';
+import PropTypes from 'prop-types';
 
 const colourStyles = {
     container: styles => ({ ...styles, width: '20em', borderRadius: '10px' }),
@@ -33,5 +33,11 @@ const Header = ({ clickMethod, selectedOption, options, }) => (
         </Select>
     </div>
 );
+
+Header.propTypes = {
+    clickMethod: PropTypes.func,
+    selectedOption: PropTypes.string,
+    options: PropTypes.array,
+};
 
 export default Header; 
